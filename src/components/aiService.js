@@ -1,5 +1,5 @@
 export const summarizeText = async (articleContent) => {
-  const API_KEY = "AIzaSyBETGY53NI_rACV-xYyEtg2mV-u5rSGCB4";
+  const API_KEY = import.meta.env.VITE_API_KEY2 ;
   // Updated model to gemini-3-flash-preview
   const URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${API_KEY}`;
 

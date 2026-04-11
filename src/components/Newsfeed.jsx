@@ -26,7 +26,7 @@ function Newsfeed(){
   const getData =  async()=>{
     
     try{
-    const response = await fetch(`https://newsapi.org/v2/everything?q=${topic}&apiKey=7526a3f95c9447ad8dfa865a93b80337`)
+    const response = await fetch(`https://newsapi.org/v2/everything?q=${topic}&apiKey=${API_KEY}`)
     const jsonData = await response.json();
     console.log(jsonData.articles);
     setNewsData(jsonData.articles);}
