@@ -25,7 +25,7 @@ const Article = ({ content }) => {
       >
         {loading ? "AI is thinking..." : "✨ Summarize with AI"}
       </button>
-       //short circuit rendering
+     
       {summary && (
         <div className="mt-4 p-4 bg-red-50 rounded-lg border-l-4 border-red-600 animate-fade-in relative">
           {/* Close Button - Positioned absolutely in top-right */}
