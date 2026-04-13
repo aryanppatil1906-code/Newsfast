@@ -7,7 +7,7 @@ import Card from './Card'
 
 function Newsfeed(){
 
-  const API_KEY = import.meta.env.VITE_API_KEY;
+ 
   const [topic,setTopic ]= useState("India");
   const [newsData , setNewsData] = useState([]);
   const [loading,setLoading] = useState(false);
@@ -26,10 +26,10 @@ function Newsfeed(){
   const getData =  async()=>{
     
     try{
-    const response = await fetch(`https://newsapi.org/v2/everything?q=${topic}&apiKey=${API_KEY}`)
+    const response = await fetch(`/api/news?topic=${topic}`)
     const jsonData = await response.json();
     console.log(jsonData.articles);
-    setNewsData(jsonData.articles);}
+    setNewsData(jsonData.articles || []);}
     catch(err){
        console.log(err);
     }
