@@ -62,11 +62,11 @@ const Card = ({ data }) => {
                <a onClick={()=>{
                 window.open(current.url)
                }}>Read more</a>
-                 <div className="mt-4">
+                
+               </div>
+                <div className="mt-4">
                    < Article content={current.description} />
                      </div> 
-               </div>
-               
               </div>
             </div>
           
