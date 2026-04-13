@@ -1,46 +1,34 @@
-import React, { useState } from 'react';
-import { summarizeText } from './aiService';
+import React, { useEffect, useState } from "react";
+import { summarizeText } from "../utils/aiservice";
 
 const Article = ({ content }) => {
   const [summary, setSummary] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const handleCloseSummary = () => {
-    setSummary(""); // Clear the summary
-  };
+  useEffect(() => {
+    const fetchSummary = async () => {
+      if (!content) return;
 
-  const handleSummarize = async () => {
-    setLoading(true);
-    const result = await summarizeText(content);
-    setSummary(result);
-    setLoading(false);
-  };
+      setLoading(true);
+      const result = await summarizeText(content);
+      setSummary(result);
+      setLoading(false);
+    };
+
+    fetchSummary();
+  }, [content]);
 
   return (
-    <div className="p-6 bg-white rounded-xl shadow-lg border border-gray-100">
-      <button 
-        onClick={handleSummarize}
-        disabled={loading}
-        className="bg-red-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-red-700 disabled:bg-gray-400"
-      >
-        {loading ? "AI is thinking..." : "✨ Summarize with AI"}
-      </button>
-     
-      {summary && (
-        <div className="mt-4 p-4 bg-red-50 rounded-lg border-l-4 border-red-600 animate-fade-in relative">
-          {/* Close Button - Positioned absolutely in top-right */}
-          <button 
-            onClick={handleCloseSummary}
-            className="absolute top-2 right-2 text-red-600 hover:text-red-800 font-bold text-xl leading-none"
-            title="Close summary"
-          >
-            ×
-          </button>
-          
-          <h4 className="font-bold text-red-800 mb-2 pr-8">AI Summary:</h4>
-          <p className="text-gray-700 leading-relaxed">{summary}</p>
-        </div>
+    <div className="mt-2">
+      
+      {loading ? (
+        <p className="text-sm text-gray-500">Generating summary...</p>
+      ) : (
+        <p className="text-sm text-gray-700 whitespace-pre-line">
+          {summary}
+        </p>
       )}
+
     </div>
   );
 };
