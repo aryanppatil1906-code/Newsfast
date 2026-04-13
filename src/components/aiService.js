@@ -1,29 +1,19 @@
 export const summarizeText = async (articleContent) => {
-  const API_KEY = import.meta.env.VITE_ ;
-  // Updated model to gemini-3-flash-preview
-  const URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${API_KEY}`;
-
-  const body = {
-    contents: [{
-      parts: [{ text: `Summarize this news in 3 bullet points: ${articleContent}` }]
-    }]
-  };
-
   try {
-    const response = await fetch(URL, {
+    const response = await fetch("/api/ai", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ articleContent })
     });
 
     const data = await response.json();
 
-    if (data.error) {
-      return `AI Error: ${data.error.message}`;
-    }
+    return data.candidates?.[0]?.content?.parts?.[0]?.text || "No summary available";
 
-    return data.candidates[0].content.parts[0].text;
   } catch (error) {
-    return "Something went wrong with the connection.";
+    console.log(error);
+    return "Something went wrong";
   }
 };
