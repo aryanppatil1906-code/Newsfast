@@ -7,7 +7,7 @@ import Card from './Card'
 
 function Newsfeed(){
 
- 
+  const API_KEY = import.meta.env.VITE_API_KEY;
   const [topic,setTopic ]= useState("India");
   const [newsData , setNewsData] = useState([]);
   const [loading,setLoading] = useState(false);
