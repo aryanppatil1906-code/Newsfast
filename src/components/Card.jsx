@@ -85,33 +85,34 @@ const Card = ({ data }) => {
       </div>
 
       {/* 🧠 SLIDING PANEL */}
-      {selectedArticle && (
-        <div className="fixed inset-0 bg-black/40 flex justify-center items-end z-50">
+      <div
+      className={`fixed inset-0 flex justify-center items-end z-50 transition-all duration-300 ${
+        selectedArticle ? "bg-black/40 visible" : "bg-transparent invisible"
+      }`}
+    >
+      <div
+        className={`bg-white w-full max-w-2xl rounded-t-xl p-5 shadow-xl transform transition-transform duration-300 ${
+          selectedArticle ? "translate-y-0" : "translate-y-full"
+        }`}
+      >
+        {/* Header */}
+        <div className="flex justify-between items-center mb-3">
+          <h2 className="font-bold text-lg">AI Summary</h2>
+          <button onClick={() => setSelectedArticle(null)}>❌</button>
+        </div>
 
-          {/* Panel */}
-          <div className="bg-white w-full max-w-2xl rounded-t-xl p-5 animate-slideUp shadow-xl">
-
-            {/* Header */}
-            <div className="flex justify-between items-center mb-3">
-              <h2 className="font-bold text-lg">
-                AI Summary
-              </h2>
-              <button onClick={() => setSelectedArticle(null)}>
-                ❌
-              </button>
-            </div>
-
-            {/* Title */}
+        {/* Content */}
+        {selectedArticle && (
+          <>
             <h3 className="text-sm font-semibold mb-2 text-gray-700">
               {selectedArticle.title}
             </h3>
-
-            {/* Summary */}
             <Article content={selectedArticle.description} />
+          </>
+        )}
+      </div>
+    </div>
 
-          </div>
-        </div>
-      )}
     </>
   );
 };
