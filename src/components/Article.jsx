@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { summarizeText } from "../utils/aiservice";
+import { summarizeText } from "./aiservice";
 
 const Article = ({ content }) => {
   const [summary, setSummary] = useState("");
